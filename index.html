@@ -3,87 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Collector mini-Maou</title>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Switzer:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 
-/* BASE */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Switzer', Helvetica, Arial, sans-serif;
   background: #f2f2f2;
-  color: black;
+  color: #000;
+  overflow-x: hidden;
 }
 
-/* MARQUEE TOP ONLY */
-.marquee-top {
+/* MARQUEE */
+.marquee-wrap {
   position: fixed;
-  top: 10px;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 20px;
+  height: 36px;
+  background: #000;
+  border-bottom: 2px solid #000;
   overflow: hidden;
-  background: black;
-  color: white;
+  display: flex;
+  align-items: center;
   z-index: 1000;
 }
 
-.track {
+.marquee-track {
   display: flex;
   width: max-content;
-  animation: scrollX 60s linear infinite;
+  animation: scrollX 55s linear infinite;
 }
 
-.track span {
-  padding-right: 150px;
+.marquee-track span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding-right: 120px;
   white-space: nowrap;
 }
 
-/* LOOP FLUIDE */
 @keyframes scrollX {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* STRUCTURE PAGE */
+/* PAGE */
+.page {
+  padding-top: 36px;
+}
+
 .wrapper {
-  padding: 60px 20px 40px;
-  max-width: 1000px;
-  margin: auto;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
 }
 
 /* PRODUCT */
 .product {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  border: 2px solid black;
-  background: white;
+  border: 2px solid #000;
+  background: #fff;
+  align-items: stretch;
 }
 
-/* IMAGE + TITLE */
+/* VISUAL */
 .visual {
   display: flex;
   flex-direction: column;
+  border-right: 2px solid #000;
 }
 
 .title-box {
-  background: white;
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
-  padding: 20px;
+  padding: 28px 28px 24px;
+  border-bottom: 2px solid #000;
 }
 
 .title-box h1 {
-  font-size: 38px;
-  line-height: 0.95;
-  margin: 0;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
 }
 
 /* CAROUSEL */
 .carousel {
   position: relative;
   overflow: hidden;
+  flex: 1;
+  background: #e8e6e0;
 }
 
 .carousel-track {
@@ -91,166 +104,236 @@ body {
   transition: transform 0.4s ease;
 }
 
-.carousel img {
+.carousel-track img {
   width: 100%;
   flex-shrink: 0;
   display: block;
 }
 
-.carousel-btn {
+.carousel-controls {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: white;
-  border: 2px solid black;
-  padding: 5px 10px;
-  cursor: pointer;
-  z-index: 2;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  border-top: 2px solid #000;
 }
 
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn {
+  flex: 1;
+  background: #fff;
+  border: none;
+  border-right: 2px solid #000;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.15s;
+}
+
+.carousel-btn:last-child { border-right: none; }
+.carousel-btn:hover { background: #000; color: #fff; }
+
+.slide-count {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  border-right: 2px solid #000;
+  background: #fff;
+  padding: 10px;
+}
 
 /* INFO */
 .info {
-  border-left: 2px solid black;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 6px;
+  height: 100%;
 }
 
 .price {
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 .badge {
-  border: 2px solid black;
   display: inline-block;
+  border: 2px solid #000;
   padding: 5px 10px;
-  margin: 10px 0;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 8px;
 }
+
+.features {
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid #000;
+  padding-top: 10px;
+  margin-top: 14px;
+}
+
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 0px solid #e0e0e0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.feature::before {
+  content: "—";
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.feature.highlight { font-weight: 600; }
 
 .desc {
   font-size: 15px;
-  line-height: 1.5;
-  margin: 20px 0;
+  line-height: 1.75;
+  color: #444;
+  font-style: italic;
+  border-top: 2px solid #000;
+  padding-top: 12px;
+  margin-top: 8px;
 }
 
+.cta-wrap {
+  border-top: 2px solid #000;
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+
 .btn {
-  border: 2px solid black;
-  padding: 15px;
-  font-size: 20px;
+  display: block;
+  border: 2px solid #000;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
-  color: black;
-  display: block;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.15s, color 0.15s;
 }
 
 .btn:hover {
-  background: black;
-  color: white;
-  transition: 0.2s;
+  background: #000;
+  color: #fff;
 }
 
 .foot {
   font-size: 10px;
   margin-top: 10px;
+  color: #888;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* RESPONSIVE */
-@media (max-width: 800px) {
-  .product {
-    grid-template-columns: 1fr;
-  }
-  .info {
-    border-left: none;
-    border-top: 2px solid black;
-  }
+@media (max-width: 720px) {
+  .product { grid-template-columns: 1fr; }
+  .visual { border-right: none; border-bottom: 2px solid #000; }
+  .title-box h1 { font-size: 38px; }
+  .price { font-size: 44px; }
 }
 
 </style>
 </head>
-
 <body>
 
-<div class="marquee-top">
-  <div class="track">
-    <span>viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée viellecigaretteécrasée</span>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée</span>
+    <span>viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée &nbsp;·&nbsp; viellecigaretteécrasée</span>
   </div>
 </div>
 
+<div class="page">
 <div class="wrapper">
 
 <div class="product">
 
-<div class="visual">
-
-<div class="title-box">
-  <h1>Collector mini-Maou 30cm</h1>
-</div>
-
-<div class="carousel">
-  <div class="carousel-track" id="carouselTrack">
-    <img src="produit1.jpg">
-    <img src="produit2.jpg">
-    <img src="produit3.jpg">
-    <img src="produit4.jpg">
-    <img src="produit5.jpg">
+  <div class="visual">
+    <div class="title-box">
+      <h1>Collector<br>mini-Maou<br>30cm</h1>
+    </div>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="produit1.jpg" alt="mini-Maou 1">
+        <img src="produit2.jpg" alt="mini-Maou 2">
+        <img src="produit3.jpg" alt="mini-Maou 3">
+        <img src="produit4.jpg" alt="mini-Maou 4">
+        <img src="produit5.jpg" alt="mini-Maou 5">
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="moveSlide(-1)">&#8249;</button>
+        <div class="slide-count" id="slideCount">01 / 05</div>
+        <button class="carousel-btn" onclick="moveSlide(1)">&#8250;</button>
+      </div>
+    </div>
   </div>
-  <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
-  <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
-</div>
 
-</div>
+  <div class="info">
 
-<div class="info">
+    <div>
+      <div class="price">38€</div>
+      <div class="badge">édition limitée — 30 pièces</div>
+    </div>
 
-<div>
-  <div class="price">38€</div>
-  <div class="badge">édition limitée — 30 pièces</div>
+    <div class="features">
+      <div class="feature highlight">5 premières commandes : mini Maou blanc offert</div>
+      <div class="feature">Pièces signées et numérotées</div>
+      <div class="feature">Photos imprimées exclusives incluses</div>
+      <div class="feature">ABS traité à l'acétone</div>
+    </div>
 
-  <div class="desc">
-  <strong>• 5 premières commandes : mini Maou blanc offert<br>
+    <div class="desc">
+      Je le fais surtout pour vous, ceux qui souhaitent en avoir un petit chez eux.
+      C'est aussi un ptit morceau de moi, prenez-en soin, svp!<br><br>
+      Je n'en ferai pas plus de 30, car je n'ai pas envie de m'épuiser avec ça.
+      Voyez ça comme un souvenir que vous voulez garder avec vous.<br><br>
+      Merci à ceux qui en commanderont un. Ce n'est pas le prix que j'aurais voulu,
+      mais il faut bien nourrir la suite. Dites-vous que cet achat finance les prochains
+      projets et m'accorde un peu de courage dans ce monde si brutal.<br><br>
+      Tituan &lt;3
+    </div>
 
-  • pièces signées et numérotées<br>
-  • photos imprimées exclusives incluses<br>
-  • ABS traité à l’acétone<br><br></strong>
-  
-<em>Je le fais surtout pour vous, ceux qui souhaitent en avoir un petit chez eux. C’est aussi un ptit morceau de moi, prenez-en soin, svp!<br><br>
+    <div class="cta-wrap">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkDKiYqHnu3REK6Ba1Uwo84rxqBr4L9-Tz0x6OBfWWrTpEKQ/viewform?usp=sharing&ouid=106605802507413257884" class="btn">
+        Je veux un mini-Maou !!!
+      </a>
+      <div class="foot">Pensez à bien remplir le formulaire</div>
+    </div>
 
-Je n’en ferai pas plus de 30, car je n’ai pas envie de m’épuiser avec ça. Voyez ça comme un souvenir que vous voulez garder avec vous.<br><br>
-
-Merci à ceux qui en commanderont un. Ce n’est pas le prix que j’aurais voulu, mais il faut bien nourrir la suite. Dites-vous que cet achat finance les prochains projets et m’accorde un peu de courage dans ce monde si brutal.<br><br>
-Tituan <3</em>
   </div>
-</div>
-
-<div>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkDKiYqHnu3REK6Ba1Uwo84rxqBr4L9-Tz0x6OBfWWrTpEKQ/viewform?usp=sharing&ouid=106605802507413257884" class="btn">
-    Je veux un mini-Maou!!!
-  </a>
-  <div class="foot">Pensez à bien remplir le formulaire svp!</div>
-</div>
 
 </div>
-
 </div>
-
 </div>
 
 <script>
 let index = 0;
 const track = document.getElementById('carouselTrack');
+const count = document.getElementById('slideCount');
 const total = track.children.length;
 
-function moveSlide(direction) {
-  index += direction;
-  if (index < 0) index = total - 1;
-  if (index >= total) index = 0;
+function moveSlide(dir) {
+  index = (index + dir + total) % total;
   track.style.transform = 'translateX(-' + (index * 100) + '%)';
+  count.textContent = String(index + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
 }
 </script>
 
